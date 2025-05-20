@@ -6,7 +6,6 @@ export const getColorFromImage = async (image: string) => {
   const colors = await ImageColors.getColors(image, {
     fallback: fallbackColor,
   });
-  console.log(colors);
 
   switch (colors.platform) {
     case 'android':
