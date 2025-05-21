@@ -27,7 +27,7 @@ export const PokemonScreen = ({ navigation, route }: Props) => {
   const { isLoading, data: pokemon } = useQuery({
     queryKey: ['pokemon', pokemonId],
     queryFn: () => getPokemonById(pokemonId),
-    staleTime: 1000 * 60 * 60, // 1 hour
+    staleTime: 1000 * 60 * 60, 
   });
 
   if (isLoading || !pokemon) {
@@ -39,9 +39,7 @@ export const PokemonScreen = ({ navigation, route }: Props) => {
       style={{ flex: 1, backgroundColor: pokemon.color }}
       bounces={false}
       showsVerticalScrollIndicator={false}>
-      {/* Header Container */}
       <View style={styles.headerContainer}>
-        {/* Nombre del Pokemon */}
         <Text
           style={{
             ...styles.pokemonName,
@@ -49,14 +47,12 @@ export const PokemonScreen = ({ navigation, route }: Props) => {
           }}>
           {Formatter.capitalize(pokemon.name) + '\n'}#{pokemon.id}
         </Text>
-
-        {/* Pokeball */}
+       
         <Image source={pokeballImg} style={styles.pokeball} />
 
         <FadeInImage uri={pokemon.avatar} style={styles.pokemonImage} />
       </View>
 
-      {/* Types */}
       <View
         style={{ flexDirection: 'row', marginHorizontal: 10, marginTop: 10 }}>
         {pokemon.types.map(type => (
@@ -75,7 +71,7 @@ export const PokemonScreen = ({ navigation, route }: Props) => {
         ))}
       </View>
 
-      {/* Sprites */}
+      
       <FlatList
         data={pokemon.sprites}
         horizontal
