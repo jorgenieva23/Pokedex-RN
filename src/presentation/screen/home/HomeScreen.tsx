@@ -1,6 +1,10 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
+import {
+  useInfiniteQuery,
+  useQuery,
+  useQueryClient,
+} from '@tanstack/react-query';
 import { getPokemons } from '../../../actions';
 import { PokeballBg } from '../../components/ui/PokeballBg';
 import { FlatList } from 'react-native-gesture-handler';
@@ -16,12 +20,20 @@ import { PokemonCard } from '../../components/pokemons/PokemonCard';
 //   });
 
 export const HomeScreen = () => {
+  const queryClient = useQueryClient();
+
   const { isLoading, data, fetchNextPage } = useInfiniteQuery({
-    queryKey: ['pokemon', 'infinite'],
+    queryKey: ['pokemons', 'infinite'],
     initialPageParam: 0,
-    queryFn: params => getPokemons(params.pageParam),
+    staleTime: 1000 * 60 * 60, // 60 minutes
+    queryFn: async params => {
+      const pokemons = await getPokemons(params.pageParam);
+      pokemons.forEach(pokemon => {
+        queryClient.setQueryData(['pokemon', pokemon.id], pokemon);
+      });
+      return pokemons;
+    },
     getNextPageParam: (lastPage, pages) => pages.length,
-    staleTime: 1000 * 60 * 60,
   });
 
   return (
@@ -35,6 +47,7 @@ export const HomeScreen = () => {
         renderItem={({ item }) => <PokemonCard pokemon={item} />}
         onEndReachedThreshold={0.6}
         onEndReached={() => fetchNextPage()}
+        showsVerticalScrollIndicator={false}
       />
     </View>
   );
