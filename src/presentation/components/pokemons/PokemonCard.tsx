@@ -25,7 +25,6 @@ export const PokemonCard = ({ pokemon }: Props) => {
           {'\n#' + pokemon.id}
         </Text>
 
-        {/* Pokeball background image */}
         <View style={styles.pokeballContainer}>
           <Image
             source={require('../../../assets/pokeball-light.png')}
@@ -33,10 +32,8 @@ export const PokemonCard = ({ pokemon }: Props) => {
           />
         </View>
 
-        {/* POkemon Image */}
         <FadeInImage uri={pokemon.avatar} style={styles.pokemonImage} />
 
-        {/* Types */}
         <Text style={[styles.name, { marginTop: 35 }]}>{pokemon.types[0]}</Text>
       </Card>
     </Pressable>

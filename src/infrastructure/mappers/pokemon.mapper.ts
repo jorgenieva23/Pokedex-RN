@@ -16,7 +16,6 @@ export class PokemonMapper {
       sprites: sprites,
       types: data.types.map(type => type.type.name),
       color: backgroundColor,
-      // color: color,
       games: data.game_indices.map(game => game.version.name),
       stats: data.stats.map(stat => ({
         name: stat.stat.name,
