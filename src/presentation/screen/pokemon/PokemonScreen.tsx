@@ -128,6 +128,26 @@ export const PokemonScreen = ({ navigation, route }: Props) => {
         )}
       />
 
+      {/* Moves */}
+      <Text style={styles.subTitle}>Moves</Text>
+      <FlatList
+        style={{ flexDirection: 'row', marginHorizontal: 20, marginTop: 10 }}
+        data={pokemon.moves}
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        centerContent
+        renderItem={({ item }) => (
+          <View style={styles.statsContainer}>
+            <Text style={{ flex: 1, color: 'white' }}>
+              {Formatter.capitalize(item.name)}
+            </Text>
+            <Text style={{ color: 'white' }}>lvl {item.level}</Text>
+          </View>
+        )}
+      />
+
+      
+
       <View style={{ height: 100 }} />
     </ScrollView>
   );
