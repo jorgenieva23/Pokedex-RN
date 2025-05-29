@@ -146,7 +146,21 @@ export const PokemonScreen = ({ navigation, route }: Props) => {
         )}
       />
 
-      
+      {/* Games */}
+      <Text style={styles.subTitle}>Games</Text>
+      <FlatList
+        data={pokemon.games}
+        horizontal
+        keyExtractor={item => item}
+        showsHorizontalScrollIndicator={false}
+        contentContainerStyle={{ paddingHorizontal: 15, marginTop: 10 }}
+        centerContent
+        renderItem={({ item }) => (
+          <Chip style={{ marginHorizontal: 1 }} selectedColor="white">
+            {Formatter.capitalize(item)}
+          </Chip>
+        )}
+      />
 
       <View style={{ height: 100 }} />
     </ScrollView>
